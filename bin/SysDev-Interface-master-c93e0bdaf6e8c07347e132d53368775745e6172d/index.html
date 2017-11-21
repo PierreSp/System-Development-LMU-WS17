@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SysDev Interface</title>
+
+    <!-- google maps -->
+    <script type="text/javascript" src='http://maps.google.com/maps/api/js?libraries=geometry&YOUR_API_KEY'></script>
+
+    <!-- angular -->
+    <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+
+    <!-- bootstrap -->
+  	<link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- leaflet -->
+  	<script type="text/javascript" src="./bower_components/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="./bower_components/leaflet/dist/leaflet.css">
+
+    <!-- angular-leaflet-directive -->
+  	<script type="text/javascript" src="./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+
+    <!-- angular-loading-bar -->
+    <script type='text/javascript' src='./bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+    <link rel='stylesheet' href='./bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
+
+  	<!-- style -->
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body ng-controller="Controller">
+    <div class="container-fluid">
+
+    	<div
+    		class="header-container background"
+    		ng-include="'components/header.html'"
+        >
+    	</div>
+    	<div
+        class="map-container"
+        ng-include="'components/map.html'"
+        >
+    	</div>
+    </div>
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/services/PathQueryService.js"></script>
+    <script type="text/javascript" src="js/services/ModifyMapService.js"></script>
+    <script type="text/javascript" src="js/services/GeoCodeService.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+
+  </body>
+</html>

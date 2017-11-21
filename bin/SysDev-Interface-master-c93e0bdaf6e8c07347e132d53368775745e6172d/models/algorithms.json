@@ -1,0 +1,24 @@
+{
+  "Path_Queries": [
+    {
+      "algorithm": "Google Path (direct)",
+      "internal_name": "Google Path (direct)",
+      "class": ""
+    },
+    {
+      "algorithm": "Google Path (via Server [OBJ])",
+      "internal_name": "Google Path (via Server [OBJ])",
+      "class": "de.lmu.ifi.dbs.sysdev.exchange.GooglePathRequest"
+    },
+    {
+      "algorithm": "Google Path (via Server [URI])",
+      "internal_name": "Google Path (via Server [URI])",
+      "class": ""
+    },
+    {
+      "algorithm": "Dijkstra Shortest Path",
+      "internal_name": "Dijkstra Shortest Path",
+      "class": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<leaflet lf-center="model.map.center" defaults="model.map.defaults" layers="model.map.layers" markers='model.map.markers' geojson='model.map.geojson' paths="model.map.paths" height="100%"></leaflet>
+
+	<div class="leaflet-draw leaflet-control layer-change">
+        <div class="leaflet-draw-section">
+            <div class="leaflet-draw-toolbar leaflet-bar leaflet-draw-toolbar-top">
+                <a class="cursor-pointer" ng-click="changeBaselayer('map')"><i class="fa fa-map-o"></i></a>
+                <a class="cursor-pointer" ng-click="changeBaselayer('satellite')"><i class="fa fa-globe"></i></a>
+                <a class="cursor-pointer" ng-if="model.visitedNodes" ng-init="model.visitedNodes = false" ng-click="changeBaselayer('grey')"><i class="fa fa-calculator"></i></a>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,25 @@
+{
+  "name": "sys-dev-interface",
+  "description": "User Interface for the Programming Project [SysDev::ESG-Data-Science]",
+  "main": "index.html",
+  "authors": [
+    "Dr. Gregor Jossé"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "ESG Data Science",
+    "interface",
+    "DBS",
+    "angular",
+    "leaflet",
+    "bootstrap"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-leaflet-directive": "^0.10.0",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.1",
+    "leaflet": "^0.7.7",
+    "angular-loading-bar": "^0.9.0"
+  }
+}

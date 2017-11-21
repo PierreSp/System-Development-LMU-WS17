@@ -1,0 +1,25 @@
+<div class="header-element-h" ng-mouseenter="model.algoDrop = true" ng-mouseleave="model.algoDrop = false" ng-init="model.algoDrop = false">
+	<div class="header-element-h-content">
+		Compute Path
+		<i class="fa fa-chevron-circle-up highlight-fa" ng-if="model.algoDrop"></i>
+		<i class="fa fa-chevron-circle-down highlight-fa" ng-if="!model.algoDrop"></i>
+	</div>
+</div>
+<div class="dropdown background" ng-show="model.algoDrop" ng-mouseenter="model.algoDrop = true" ng-mouseleave="model.algoDrop = false">
+	Set two markers and press Go!
+	<div class="seperator"></div>
+	Path Queries:
+	<div ng-repeat="algorithm in model.algorithms" ng-click="selectAlgo(algorithm)">
+		<input type="radio" name="algorithms" ng-checked="model.selected.algorithm === algorithm">
+		<span class="calc-drop-radio">{{ algorithm.algorithm }}</span>
+	</div>
+	<!--
+	<div class="seperator"></div>
+	Cost Criteria:
+	<div ng-repeat="criterium in model.selected.algorithm.criteria" ng-click="selectCost(criterium)">
+		<input type="radio" ng-checked="model.selected.costs.indexOf(criterium) !== -1">
+		<span class="calc-drop-radio">{{ criterium }}</span>
+	</div>
+	<div class="seperator"></div>-->
+	<span ng-click="calculate()" class="go-button cursor-pointer">Go!</span>
+</div>

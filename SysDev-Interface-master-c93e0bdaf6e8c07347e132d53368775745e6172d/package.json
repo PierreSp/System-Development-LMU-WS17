@@ -1,0 +1,28 @@
+{
+  "name": "sys-dev-interface",
+  "version": "0.0.1",
+  "description": "User Interface for the Programming Project [SysDev::ESG-Data-Science]",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"None specified\"",
+    "develop": "bower i && http-server . -o -c-1 -p 9292",
+    "build:css": "postcss --use autoprefixer -b 'last 2 versions' css/style.css --replace"
+  },
+  "keywords": [
+    "ESG Data Science",
+    "interface",
+    "DBS",
+    "angular",
+    "leaflet",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "bugs": {},
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "bower": "^1.7.9",
+    "http-server": "^0.9.0",
+    "postcss-cli": "^2.5.2",
+    "standard": "^7.1.1"
+  }
+}
