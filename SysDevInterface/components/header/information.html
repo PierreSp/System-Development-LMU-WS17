@@ -1,0 +1,45 @@
+<div class="header-element-h cursor-pointer" ng-click="model.infoDrop = !model.infoDrop" ng-init="model.infoDrop = false">
+	<div class="header-element-h-content">
+		Information
+		<i class="fa fa-chevron-circle-up highlight-fa" ng-if="model.infoDrop"></i>
+		<i class="fa fa-chevron-circle-down highlight-fa" ng-if="!model.infoDrop"></i>
+	</div>
+</div>
+<div class="dropdown background" ng-show="model.infoDrop">
+	<ul class="list">
+		<li ng-show="model.map.markers[0]">
+			<p><span ng-show="model.map.markers[1]">Route from</span>
+				<span ng-show="!model.map.markers[1]">Marker set on</span><br>
+				<span ng-repeat="line in model.map.markers[0].formattedAddress">{{ line }}<br /></span></p>
+			<p ng-show="model.map.markers[1]">to <br>
+				<span ng-repeat="line in model.map.markers[1].formattedAddress">{{ line }}<br /></span></p>
+		</li>
+		<li ng-show="model.map.routeInfo">
+		<div class="seperator"></div>
+			<span ng-repeat="(key, value) in model.map.routeInfo">{{ key }}: {{ value }}<br></span>
+		</li>
+		<li class="information-element route-elements-container" ng-show="model.map.geojson.data">
+			<div class="seperator"></div>
+			<div ng-repeat="feature in model.map.geojson.data.features" ng-if="model.algorithmKind === 'single' || model.algorithmKind === 'charging'" ng-mouseenter="hoverSegment($index, true)" ng-mouseleave="hoverSegment($index, false)" class="route-segment" ng-class="{'route-segment-active': model.selected.hover === $index}" style="display: flex; align-items: center">
+				<img ng-src="{{feature.properties.mode === 'PUBLIC' ? './resources/train.png' : feature.properties.mode === 'STREET' ? '/resources/car-marker.png' : feature.properties.mode ? './resources/chang.png' : './resources/car-marker.png'}}" style="margin-right: 10px" height="24" width="30">
+				<span ng-if="feature.properties.mode === 'PUBLIC'">
+				 {{ feature.properties.instructions[0] }} with<br>
+				 [{{ feature.properties.instructions[2] }}] {{ feature.properties.instructions[3] }}<br>
+				 at {{ feature.properties.instructions[4] }} to {{ feature.properties.instructions[1] }}
+			 </span>
+			 <span ng-if="feature.properties.mode != 'PUBLIC'">
+					 {{ feature.properties.instructions[0] }} to <br/>{{ feature.properties.instructions[1] }}
+			 </span>
+			</div>
+			<div ng-repeat="feature in model.map.geojson.data.features" ng-if="model.algorithmKind === 'multiple'" ng-mouseenter="hoverSegment($index, true)" ng-mouseleave="hoverSegment($index, false)" class="route-segment" ng-class="{'route-segment-active': model.selected.hover === $index}">
+				<span ng-repeat="(key, value) in feature.properties.costs" style="margin-left: 5px">
+					{{ key }}: {{ value }}<br/>
+				</span>
+			</div>
+		</li>
+		<li ng-show="model.usedAlgorithm">
+		<div class="seperator"></div>
+			Path service used:<br>{{ model.usedAlgorithm }}<br>
+		</li>
+	</ul>
+</div>
