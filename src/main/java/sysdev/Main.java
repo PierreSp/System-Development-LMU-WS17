@@ -39,7 +39,7 @@ public class Main {
 		server = SysDevJerseyServer.startServer("http://localhost:9090/sysdev/");
 		Client c = ClientBuilder.newClient();
 		// Define Target
-		target = c.target("http://localhost:9090/sysdev/");
+		setTarget(c.target("http://localhost:9090/sysdev/"));
 		// Test optionality
 		/*String output = target.path("services/directions/uri").queryParam("originLat", 48.96670) // Hainsfarth
 				.queryParam("originLon", 10.61670).queryParam("destinationLat", 48.24896) // Garching
@@ -49,6 +49,22 @@ public class Main {
 		
 		// server.shutdown(); // No stop, but shutdown
 
+	}
+
+	public static WebTarget getTarget() {
+		return target;
+	}
+
+	public static void setTarget(WebTarget target) {
+		Main.target = target;
+	}
+
+	public ObjectMapper getMapper() {
+		return mapper;
+	}
+
+	public void setMapper(ObjectMapper mapper) {
+		this.mapper = mapper;
 	}
 
 }

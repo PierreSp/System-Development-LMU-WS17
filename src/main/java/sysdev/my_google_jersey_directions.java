@@ -46,7 +46,7 @@ public class my_google_jersey_directions {
 
 	private static final String GOOGLE_DIRECTIONS = "https://maps.googleapis.com/maps/api/directions/json?";
 	private static final String GOOGLE_KEY = "key=AIzaSyDD3mIAFIetKZUVJ8EGXxBU4iBDu4w93IU";
-	private FillGraph fg = new sysdev.graph.FillGraph();
+	private FillGraph fg = new sysdev.graph.FillGraph(); // Load graph only once
 	private Graph graph = fg.getGraph();
 
 	public static String jersey_path(double lat_o, double lon_o, double lat_d, double lon_d) {
@@ -74,7 +74,7 @@ public class my_google_jersey_directions {
 	public String directionURI(@QueryParam("originLat") double originLat, @QueryParam("originLon") double originLon,
 			@QueryParam("destinationLat") double destinationLat, @QueryParam("destinationLon") double destinationLon) {
 		String output = jersey_path(originLat, originLon, destinationLat, destinationLon);
-		System.out.println(output);
+		// System.out.println(output);
 		return output;
 	}
 
