@@ -9,6 +9,6 @@
 - run npm run develop (runs a webrowser with leaflet interface)
 
 ### Navigation
-- run server.java in sysdev/tcpserver
+- run server.java in sysdev.tcpserver
 - run ```mvn exec:java -Dexec.mainClass="sysdev.Main"``` from the root directory (starts the jersey server)
 - Use the browser for navigation
