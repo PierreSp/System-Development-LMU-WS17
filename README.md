@@ -1,4 +1,4 @@
-# System-Development-LMU-WS17-
+# System-Development-LMU-WS17
 
 ## How to run
 - clone repo
