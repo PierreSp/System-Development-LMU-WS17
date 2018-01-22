@@ -3,12 +3,11 @@
  */
 package sysdev;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,26 +15,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.geojson.Feature;
-import org.geojson.FeatureCollection;
-import org.geojson.Geometry;
-import org.geojson.LineString;
-import org.geojson.LngLatAlt;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-/**
- * @author pierre
- *
- */
-import sysdev.graph.DijkstraAlgorithm;
 import sysdev.graph.FillGraph;
 import sysdev.graph.Graph;
-import sysdev.graph.Node;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -86,44 +71,43 @@ public class my_google_jersey_directions {
 			@QueryParam("originLon") double originLon, @QueryParam("destinationLat") double destinationLat,
 			@QueryParam("destinationLon") double destinationLon) {
 
-		String output = "";
-		try {
+        Socket socket =null; 
+        try {
+            socket = new Socket("localhost", 9595);
+           
+        DataOutputStream  oos = new DataOutputStream(socket.getOutputStream());
+        
+        oos.writeDouble(originLat);
+        oos.writeDouble(originLon);
+        oos.writeDouble(destinationLat);
+        oos.writeDouble(destinationLon);
+        oos.flush();
+        
+        DataInputStream ois = new DataInputStream(socket.getInputStream());
+        String response = (String) ois.readUTF();
+        System.out.println(response);
+        return response;
 
-			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-			Node nearest_origin = graph.nearest_node(new Node(originLat, originLon));
-			Node nearest_dest = graph.nearest_node(new Node(destinationLat, destinationLon));
-			dijkstra.execute(nearest_origin, nearest_dest);
-			LinkedList<Node> path = dijkstra.getPath(nearest_dest);
-			FeatureCollection featureCollection = new FeatureCollection();
-			Feature feature = new Feature();
-			List<LngLatAlt> LngLatList_path = new ArrayList<LngLatAlt>();
-			for (Node node : path) {
-				LngLatAlt lngLatAlt = new LngLatAlt(node.getLon(), node.getLat());
-				LngLatList_path.add(lngLatAlt);
-			}
-			Geometry<LngLatAlt> opt_linestring = new LineString();
-			opt_linestring.setCoordinates(LngLatList_path);
-			feature.setGeometry(opt_linestring);
-			Map<String, Object> costs = new HashMap<String, Object>();
-			// DecimalFormat df = new DecimalFormat("#.###");
-			System.out.println("Mystat");
-			System.out.println(dijkstra.getPath_duration());
-			costs.put("Distance", (int) dijkstra.getPath_distance());
-			costs.put("Travel_Time", (int) (dijkstra.getPath_duration()));
-			feature.setProperty("costs", costs);
-			featureCollection.add(feature);
-
-			output = new ObjectMapper().writeValueAsString(featureCollection);
-			output = "{\"data\": " + output + "}";
-			System.out.println(output);
-
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return output;
-	}
+        } catch (UnknownHostException e) {
+            System.out.println("Unknown Host...");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("IOProbleme...");
+            e.printStackTrace();
+        } finally {
+            if (socket != null)
+                try {
+                    socket.close();
+                    System.out.println("Socket geschlossen...");
+                    
+                    
+                } catch (IOException e) {
+                    System.out.println("Socket nicht zu schliessen...");
+                    e.printStackTrace();
+                }
+        }
+		return null; 
+    }
 
 	public static String buildDirectionQueryString(double lat_o, double lon_o, double lat_d, double lon_d) {
 		String origin = "origin=" + lat_o + "," + lon_o;

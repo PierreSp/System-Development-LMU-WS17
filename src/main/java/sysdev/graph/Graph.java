@@ -49,19 +49,30 @@ public class Graph {
 					// TODO: handle exception
 					System.out.println("Empty Bucket");
 				}
-        		
         	}
     	}
+    	System.out.println("Found nearest node");
+    	
+    	// if the distance was too far search all nodes to avoid errors
+    	if (possible_nodes.isEmpty()) {
+    		System.out.println("NO CLOSE NODES. DO LONG SEARCH");
+			for (Node node : this.nodes.values()) {
+    			if(node != null) {
+    				possible_nodes.add(node);
+    			}
+			}
+    	}
+    	
     	int shortest_dist = Integer.MAX_VALUE;
     	Node nearest = null;
     	for (Node node : possible_nodes) {
+    		// Look for "airline" closest nodes
         	Edge helper_edge = new Edge(node_in, node, 10);
         	if (helper_edge.getWeight() < shortest_dist) {
         		nearest = node;
         		shortest_dist = helper_edge.getWeight();
         	}
         }
-        
 		return nearest;
     }
 
