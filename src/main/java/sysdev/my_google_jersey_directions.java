@@ -115,4 +115,12 @@ public class my_google_jersey_directions {
 		return GOOGLE_DIRECTIONS + origin + "&" + destination + "&" + GOOGLE_KEY;
 	}
 
+	public Graph getGraph() {
+		return graph;
+	}
+
+	public void setGraph(Graph graph) {
+		this.graph = graph;
+	}
+
 }

@@ -9,12 +9,11 @@ import java.io.IOException;
 import sysdev.graph.*;
 /**
  *
- * @author schubert
+ * @author schubert, modified by pierre
  */
 public class Server {
-    //Some Data replacing the the GeoJson File
-    public static final String jsonResult = "{\"data\":{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"costs\":{\"Travel_Time\":1000.0,\"Distance\":100.0},\"instructions\":[]},\"geometry\":{\"type\":\"LineString\",\"coordinates\":[[13.382720947,52.536064212],[13.403406143,52.53376702]]}}]}}\n";
-	private FillGraph fg = new sysdev.graph.FillGraph(); // Load graph only once
+	// Load graph only once
+	private FillGraph fg = new sysdev.graph.FillGraph();
 	private Graph graph;
     //instance data which might be the road network 
     public int port = 9595;

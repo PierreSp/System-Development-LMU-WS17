@@ -39,7 +39,8 @@ public class Listener implements Runnable {
     public void run() {
                 stop = false;
                 try {
-                    ServerSocket serverSocket = new ServerSocket(PORT);
+                    @SuppressWarnings("resource") // Will be killed when process is closed, so do not care now
+					ServerSocket serverSocket = new ServerSocket(PORT);
                     while (!stop) {
                         final Socket clientSocket = serverSocket.accept();
                         RequestHandler handler = new RequestHandler( clientSocket, serverData);
