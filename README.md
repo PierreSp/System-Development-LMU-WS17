@@ -9,6 +9,5 @@
 - run npm run develop (runs a webrowser with leaflet interface)
 
 ### Navigation
-- run server.java in sysdev.tcpserver
-- run ```mvn exec:java -Dexec.mainClass="sysdev.Main"``` from the root directory (starts the jersey server)
-- Use the browser for navigation
+- Install tmux before running the commands or follow the steps in the runscript. If tmux is installed
+- run ```sh runscript.sh``` from the root directory (starts the jersey server)
