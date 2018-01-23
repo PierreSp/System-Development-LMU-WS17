@@ -39,7 +39,7 @@ public class DijkstraAlgorithm {
         unSettledNodes.add(source);
         // (unSettledNodes.size() > 0) if we want to find connection to all nodes, makes
         // only sense with fixed source Added, because sometimes there is no path
-        while (!isSettled(destination) | (unSettledNodes.size() > 0))  {
+        while (!isSettled(destination))  {
             Node node = getMinimum(unSettledNodes); // find closet point
             settledNodes.add(node);
             unSettledNodes.remove(node);
