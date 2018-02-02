@@ -5,10 +5,11 @@ package sysdev.graph;
  *
  */	
 
-public class Node {
+public class Node implements Comparable<Node> {
 
 	private double lon;
 	private double lat;
+	private double h_target;
 
     final private String id;
     final private String bucketid;
@@ -42,6 +43,7 @@ public class Node {
         this.id = lat + "" + lon;
         this.lon = lon;
         this.lat = lat;
+        this.setH_target(10000000);
         long blat = initBucketLat(lat);
         long blon = initBucketLon(lon);
         this.bucketlat = blat;
@@ -97,6 +99,19 @@ public class Node {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+	public double getH_target() {
+		return h_target;
+	}
+
+	public void setH_target(double h_target) {
+		this.h_target = h_target;
+	}
+	// For Astar we want to have comparison for heuristik
+	@Override
+    public int compareTo(Node d) {
+        return Double.compare(d.getH_target(), this.getH_target());
     }
 
 }
