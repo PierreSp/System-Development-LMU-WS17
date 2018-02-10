@@ -20,7 +20,7 @@ public class AstarAlgorithm {
     private Map<Node, Integer> distance; // shortest distance of Node and next to target
     private double path_duration;
     private int path_distance;
-    PriorityQueue<Node> pQueue; // Not used so far. Is this really faster thant my map?
+    PriorityQueue<Node> pQueue; // Not used so far. Is this really faster than my map?
 
     public AstarAlgorithm(Graph graph) {
         // create a copy of the array so that we can operate on this array
