@@ -106,12 +106,12 @@ public class DijkstraAlgorithm {
      */
     private Node getMinimum(Set<Node> nodelist) {
     	Node minimum = null;
-        for (Node vertex : nodelist) {
+        for (Node node_for_min : nodelist) {
             if (minimum == null) {
-                minimum = vertex;
+                minimum = node_for_min;
             } else {
-                if (getShortestDistance(vertex) < getShortestDistance(minimum)) {
-                    minimum = vertex;
+                if (getShortestDistance(node_for_min) < getShortestDistance(minimum)) {
+                    minimum = node_for_min;
                 }
             }
         }

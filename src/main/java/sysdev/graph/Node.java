@@ -19,7 +19,7 @@ public class Node implements Comparable<Node> {
     private final int R = 6371000;
     private final double pi = Math.PI;
     private final double angle_lat = (2*pi*R)/(101*360);
-    private final double max_lat = 60.908756256113516; // 60.908756256103516
+    private final double max_lat = 60.908756256113516;
     private final double angle_lon = (2*pi*R*Math.cos(Math.toRadians(max_lat)))/(101*360);
 
     //As stated in the description, we assume that the earth is a sphere with radius 6371km.
