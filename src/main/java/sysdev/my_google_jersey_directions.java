@@ -98,11 +98,11 @@ public class my_google_jersey_directions {
             if (socket != null)
                 try {
                     socket.close();
-                    System.out.println("Socket geschlossen...");
+                    System.out.println("Closed Socket...");
                     
                     
                 } catch (IOException e) {
-                    System.out.println("Socket nicht zu schliessen...");
+                    System.out.println("Not able to close socket...");
                     e.printStackTrace();
                 }
         }

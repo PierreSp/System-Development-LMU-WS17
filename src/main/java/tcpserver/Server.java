@@ -52,7 +52,7 @@ public class Server {
     public static void main(String[] args) throws IOException{
         Server server = new Server();
         server.startListener();
-        System.out.println("SysDev TCP Server started on localhost:" +server.port);
+        System.out.println("SysDev TCP Server started on localhost:" + server.port);
         System.in.read();
         server.shutdown();
         System.exit(0);
