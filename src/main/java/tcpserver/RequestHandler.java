@@ -71,8 +71,8 @@ public class RequestHandler implements Runnable{
             String output = "";
 			Node nearest_origin = graph.nearest_node(new Node(originLat, originLon));
 			Node nearest_dest = graph.nearest_node(new Node(destinationLat, destinationLon));
-			AStar shortest_path_algo = new AStar();
-			List<Node> path = shortest_path_algo.aStar(graph, nearest_origin, nearest_dest);
+			AStar shortest_path_algo = new AStar(graph);
+			List<Node> path = shortest_path_algo.aStar(nearest_origin, nearest_dest);
 			FeatureCollection featureCollection = new FeatureCollection();
 			Feature feature = new Feature();
 			List<LngLatAlt> LngLatList_path = new ArrayList<LngLatAlt>();

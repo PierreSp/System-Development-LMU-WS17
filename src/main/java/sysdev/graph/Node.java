@@ -5,7 +5,7 @@ package sysdev.graph;
  *
  */	
 
-public class Node implements Comparable<Node> {
+public class Node{
 
 	private double lon;
 	private double lat;
@@ -108,10 +108,5 @@ public class Node implements Comparable<Node> {
 	public void setH_target(int h_target) {
 		this.h_target = h_target;
 	}
-	// For Astar we want to have comparison for heuristik
-	@Override
-    public int compareTo(Node d) {
-        return Double.compare(d.getH_target(), this.getH_target());
-    }
 
 }
