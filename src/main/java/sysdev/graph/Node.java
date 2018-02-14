@@ -5,10 +5,11 @@ package sysdev.graph;
  *
  */	
 
-public class Node {
+public class Node{
 
 	private double lon;
 	private double lat;
+	private int h_target;
 
     final private String id;
     final private String bucketid;
@@ -42,6 +43,7 @@ public class Node {
         this.id = lat + "" + lon;
         this.lon = lon;
         this.lat = lat;
+        this.setH_target(10000000);
         long blat = initBucketLat(lat);
         long blon = initBucketLon(lon);
         this.bucketlat = blat;
@@ -98,5 +100,13 @@ public class Node {
             return false;
         return true;
     }
+
+	public int getH_target() {
+		return h_target;
+	}
+
+	public void setH_target(int h_target) {
+		this.h_target = h_target;
+	}
 
 }
