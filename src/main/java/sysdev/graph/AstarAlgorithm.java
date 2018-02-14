@@ -56,7 +56,7 @@ public class AstarAlgorithm {
         List<Node> adjacentNodes = getNeighbors(node);
         for (Node target : adjacentNodes) {
             if (getShortestDistance(target) > getShortestDistance(node)
-                    + getDistance(node, target)) {
+                    + getDistance(node, target) + node.getH_target() - target.getH_target()) {
                 distance.put(target, getShortestDistance(node)
                         + getDistance(node, target));
                 predecessors.put(target, node);
