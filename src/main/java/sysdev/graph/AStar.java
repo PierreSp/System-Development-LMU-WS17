@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 
@@ -24,21 +25,14 @@ public class AStar {
     public List<Node> aStar(Node start, Node goal) {
     	
     	// Do inits
+    	
         final int SIZE = GRAPH.getNodes().size(); // reserve space (Does make more sense for large graphs, but init saves so much time :) )
+        
         final Set<Node> closedSet = new HashSet<Node>(SIZE); // The set of checked nodes.
-        final List<Node> openSet = new ArrayList<Node>(SIZE); // The set of nodes to be evaluated, initially containing the start node
-        final Map<Node,Node> cameFrom = new HashMap<Node,Node>(); // The map of nodes for the final path
+ final Map<Node,Node> cameFrom = new HashMap<Node,Node>(); // The map of nodes for the final path
         final Map<Node,Integer> gScore = new HashMap<Node,Integer>(); // Cost(real not heuristic) from start along final path.
         // Estimated total cost from start to goal through y Using heuristic)
         final Map<Node,Integer> fScore = new HashMap<Node,Integer>();
-        
-        // Start with the work
-        openSet.add(start);
-        gScore.put(start, 0);
-        for (Node v : GRAPH.getNodes().values())
-            fScore.put(v, Integer.MAX_VALUE);
-        fScore.put(start, heuristicCostEstimate(start,goal));
-
         final Comparator<Node> comparator = new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
@@ -49,13 +43,25 @@ public class AStar {
                 return 0;
             }
         };
+        PriorityQueue<Node> openSet=
+                new PriorityQueue<Node>(SIZE, comparator);
+        //final List<Node> openSet = new ArrayList<Node>(SIZE); // The set of nodes to be evaluated, initially containing the start node
+       
+        // Start with the work
+        openSet.add(start);
+        gScore.put(start, 0);
+        for (Node v : GRAPH.getNodes().values())
+            fScore.put(v, Integer.MAX_VALUE);
+        fScore.put(start, heuristicCostEstimate(start,goal));
+
+
 
         while (!openSet.isEmpty()) {
-            final Node current = openSet.get(0);
+            final Node current = openSet.remove();
             if (current.equals(goal))
                 return reconstructPath(cameFrom, goal);
 
-            openSet.remove(0);
+           // openSet.remove(0);
             closedSet.add(current);
             List<Node> neighbors = getNeighbors(current);
             for (Node neighbor : neighbors) {
@@ -75,7 +81,7 @@ public class AStar {
                 fScore.put(neighbor, estimatedFScore);
 
                 // sort so largest is top
-                Collections.sort(openSet,comparator);
+                //Collections.sort(openSet,comparator);
             }
         }
 
