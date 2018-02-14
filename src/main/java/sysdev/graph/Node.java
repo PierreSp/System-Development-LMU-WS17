@@ -9,7 +9,7 @@ public class Node implements Comparable<Node> {
 
 	private double lon;
 	private double lat;
-	private double h_target;
+	private int h_target;
 
     final private String id;
     final private String bucketid;
@@ -101,11 +101,11 @@ public class Node implements Comparable<Node> {
         return true;
     }
 
-	public double getH_target() {
+	public int getH_target() {
 		return h_target;
 	}
 
-	public void setH_target(double h_target) {
+	public void setH_target(int h_target) {
 		this.h_target = h_target;
 	}
 	// For Astar we want to have comparison for heuristik

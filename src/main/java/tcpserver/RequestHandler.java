@@ -7,7 +7,7 @@ package tcpserver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import sysdev.graph.DijkstraAlgorithm;
+import sysdev.graph.AStar;
 import sysdev.graph.Graph;
 import sysdev.graph.Node;
 
@@ -69,12 +69,10 @@ public class RequestHandler implements Runnable{
             double destinationLat = ois.readDouble();
             double destinationLon = ois.readDouble();
             String output = "";
-			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 			Node nearest_origin = graph.nearest_node(new Node(originLat, originLon));
 			Node nearest_dest = graph.nearest_node(new Node(destinationLat, destinationLon));
-			dijkstra.execute(nearest_origin, nearest_dest);
-			
-			LinkedList<Node> path = dijkstra.getPath(nearest_dest);
+			AStar shortest_path_algo = new AStar();
+			List<Node> path = shortest_path_algo.aStar(graph, nearest_origin, nearest_dest);
 			FeatureCollection featureCollection = new FeatureCollection();
 			Feature feature = new Feature();
 			List<LngLatAlt> LngLatList_path = new ArrayList<LngLatAlt>();
@@ -88,9 +86,9 @@ public class RequestHandler implements Runnable{
 			Map<String, Object> costs = new HashMap<String, Object>();
 			// DecimalFormat df = new DecimalFormat("#.###");
 			System.out.println("Mystat");
-			System.out.println(dijkstra.getPath_duration());
-			costs.put("Distance", (int) dijkstra.getPath_distance());
-			costs.put("Travel_Time", (int) (dijkstra.getPath_duration()));
+			System.out.println(shortest_path_algo.getPath_duration());
+			costs.put("Distance", (int) shortest_path_algo.getPath_distance());
+			costs.put("Travel_Time", (int) (shortest_path_algo.getPath_duration()));
 			feature.setProperty("costs", costs);
 			featureCollection.add(feature);
 
