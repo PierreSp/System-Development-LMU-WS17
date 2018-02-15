@@ -46,7 +46,7 @@ public class Graph {
             			}
                     }
 				} catch (Exception e) {
-					// TODO: handle exception
+					// TODO: handle exception / inform me how good this works 
 					System.out.println("Empty Bucket");
 				}
         	}

@@ -8,7 +8,6 @@ import javax.ws.rs.client.WebTarget;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 
@@ -23,7 +22,6 @@ public class Main {
 	private static HttpServer server; // Jersey Module
 	@SuppressWarnings("unused")
 	private static WebTarget jer_target; // Connection to Jersey
-	private ObjectMapper mapper = new ObjectMapper();
 
 	public void setUp() throws Exception {
 
@@ -38,9 +36,9 @@ public class Main {
 
 		// Start my Jersey Server
 		server = SysDevJerseyServer.startServer("http://localhost:9090/sysdev/");
-		Client c = ClientBuilder.newClient();
-		// Define Target
-		jer_target = c.target("http://localhost:9090/sysdev/");
+		// Client c = ClientBuilder.newClient();
+		// Define Target (onl testing)
+		// jer_target = c.target("http://localhost:9090/sysdev/");
 		// Test optionality
 		/*String output = target.path("services/directions/uri").queryParam("originLat", 48.96670) // Hainsfarth
 				.queryParam("originLon", 10.61670).queryParam("destinationLat", 48.24896) // Garching
@@ -52,12 +50,5 @@ public class Main {
 
 	}
 
-	public ObjectMapper getMapper() {
-		return mapper;
-	}
-
-	public void setMapper(ObjectMapper mapper) {
-		this.mapper = mapper;
-	}
 
 }

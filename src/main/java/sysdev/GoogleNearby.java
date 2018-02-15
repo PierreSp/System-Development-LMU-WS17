@@ -11,6 +11,7 @@ import java.net.URL;
 import javax.ws.rs.core.MediaType;
 
 public class GoogleNearby {
+	// Just an example of how to use google api
 
 	private static final String GOOGLE_NEARBY = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 	private static final String GOOGLE_KEY = "key=AIzaSyDAu_Eic5g_0MbPVAXAKvjF5Uq39iDjR8Q";

@@ -43,7 +43,7 @@ public class Node{
         this.id = lat + "" + lon;
         this.lon = lon;
         this.lat = lat;
-        this.setH_target(10000000);
+        this.setH_target(10000000); // My system works only for up tp 10000 km distances 
         long blat = initBucketLat(lat);
         long blon = initBucketLon(lon);
         this.bucketlat = blat;

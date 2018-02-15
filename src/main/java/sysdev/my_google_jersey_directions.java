@@ -19,8 +19,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import sysdev.graph.FillGraph;
-import sysdev.graph.Graph;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -31,8 +29,7 @@ public class my_google_jersey_directions {
 
 	private static final String GOOGLE_DIRECTIONS = "https://maps.googleapis.com/maps/api/directions/json?";
 	private static final String GOOGLE_KEY = "key=AIzaSyDD3mIAFIetKZUVJ8EGXxBU4iBDu4w93IU";
-	private FillGraph fg = new sysdev.graph.FillGraph(); // Load graph only once
-	private Graph graph = fg.getGraph();
+
 
 	public static String jersey_path(double lat_o, double lon_o, double lat_d, double lon_d) {
 		try {
@@ -115,12 +112,6 @@ public class my_google_jersey_directions {
 		return GOOGLE_DIRECTIONS + origin + "&" + destination + "&" + GOOGLE_KEY;
 	}
 
-	public Graph getGraph() {
-		return graph;
-	}
 
-	public void setGraph(Graph graph) {
-		this.graph = graph;
-	}
 
 }

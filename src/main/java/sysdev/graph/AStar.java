@@ -35,17 +35,17 @@ public class AStar {
         final Map<Node,Integer> fScore = new HashMap<Node,Integer>();
         final Comparator<Node> comparator = new Comparator<Node>() {
             @Override
-            public int compare(Node o1, Node o2) {
-                if (fScore.get(o1) < fScore.get(o2))
+            public int compare(Node origin, Node destination) {
+                if (fScore.get(origin) < fScore.get(destination))
                     return -1;
-                if (fScore.get(o2) < fScore.get(o1))
+                if (fScore.get(destination) < fScore.get(origin))
                     return 1;
                 return 0;
             }
         };
         PriorityQueue<Node> openSet=
-                new PriorityQueue<Node>(SIZE, comparator);
-        //final List<Node> openSet = new ArrayList<Node>(SIZE); // The set of nodes to be evaluated, initially containing the start node
+                new PriorityQueue<Node>(SIZE, comparator); // The set of nodes to be evaluated, initially containing the start node
+
        
         // Start with the work
         openSet.add(start);
@@ -80,8 +80,6 @@ public class AStar {
                 final int estimatedFScore = gScore.get(neighbor) + heuristicCostEstimate(neighbor, goal);
                 fScore.put(neighbor, estimatedFScore);
 
-                // sort so largest is top
-                //Collections.sort(openSet,comparator);
             }
         }
 
@@ -107,7 +105,7 @@ public class AStar {
         while (current != null) {
             final Node previous = current;
             current = cameFrom.get(current);
-            if (current != null && current.getId() != previous.getId()) {
+            if (current != null ) {
                 path_duration = path_duration + getDuration(previous, current);
                 path_distance = path_distance + getDistance(previous, current);
                 totalPath.add(previous);
