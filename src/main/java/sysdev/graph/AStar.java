@@ -12,8 +12,8 @@ import java.util.Set;
 
 
 public class AStar {
-    double path_duration;
-    int path_distance;
+    double path_duration; // remember path distance for info panel
+    int path_distance; // remember path distance for info panel
 	final List<Edge> ALLEDGES;
 	final Graph GRAPH;
 
@@ -28,57 +28,57 @@ public class AStar {
     	
         final int SIZE = GRAPH.getNodes().size(); // reserve space (Does make more sense for large graphs, but init saves so much time :) )
         
-        final Set<Node> closedSet = new HashSet<Node>(SIZE); // The set of checked nodes.
- final Map<Node,Node> cameFrom = new HashMap<Node,Node>(); // The map of nodes for the final path
-        final Map<Node,Integer> gScore = new HashMap<Node,Integer>(); // Cost(real not heuristic) from start along final path.
+        final Set<Node> closed_set = new HashSet<Node>(SIZE); // The set of checked nodes.
+ final Map<Node,Node> optimal_path = new HashMap<Node,Node>(); // The map of nodes for the final path
+        final Map<Node,Integer> g_score = new HashMap<Node,Integer>(); // Cost(real not heuristic) from start along final path.
         // Estimated total cost from start to goal through y Using heuristic)
-        final Map<Node,Integer> fScore = new HashMap<Node,Integer>();
+        final Map<Node,Integer> f_score = new HashMap<Node,Integer>();
         final Comparator<Node> comparator = new Comparator<Node>() {
             @Override
             public int compare(Node origin, Node destination) {
-                if (fScore.get(origin) < fScore.get(destination))
+                if (f_score.get(origin) < f_score.get(destination))
                     return -1;
-                if (fScore.get(destination) < fScore.get(origin))
+                if (f_score.get(destination) < f_score.get(origin))
                     return 1;
                 return 0;
             }
         };
-        PriorityQueue<Node> openSet=
+        PriorityQueue<Node> open_set=
                 new PriorityQueue<Node>(SIZE, comparator); // The set of nodes to be evaluated, initially containing the start node
 
        
         // Start with the work
-        openSet.add(start);
-        gScore.put(start, 0);
+        open_set.add(start);
+        g_score.put(start, 0);
         for (Node v : GRAPH.getNodes().values())
-            fScore.put(v, Integer.MAX_VALUE);
-        fScore.put(start, heuristicCostEstimate(start,goal));
+            f_score.put(v, Integer.MAX_VALUE);
+        f_score.put(start, heuristicCostEstimate(start,goal));
 
 
 
-        while (!openSet.isEmpty()) {
-            final Node current = openSet.remove();
+        while (!open_set.isEmpty()) {
+            final Node current = open_set.remove();
             if (current.equals(goal))
-                return reconstructPath(cameFrom, goal);
+                return reconstructPath(optimal_path, goal);
 
            // openSet.remove(0);
-            closedSet.add(current);
+            closed_set.add(current);
             List<Node> neighbors = getNeighbors(current);
             for (Node neighbor : neighbors) {
-                if (closedSet.contains(neighbor))
+                if (closed_set.contains(neighbor))
                     continue; // Ignore the neighbor which is already evaluated.
 
-                final int truecost = gScore.get(current) + Edge.calc_distance(current,neighbor); // length of this path.
-                if (!openSet.contains(neighbor))
-                    openSet.add(neighbor); // Add a new node
-                else if (truecost >= gScore.get(neighbor))
+                final int truecost = g_score.get(current) + Edge.calc_distance(current,neighbor); // length of this path.
+                if (!open_set.contains(neighbor))
+                    open_set.add(neighbor); // Add a new node
+                else if (truecost >= g_score.get(neighbor))
                     continue;
 
                 // This path is the best until now. Record it!
-                cameFrom.put(neighbor, current);
-                gScore.put(neighbor, truecost);
-                final int estimatedFScore = gScore.get(neighbor) + heuristicCostEstimate(neighbor, goal);
-                fScore.put(neighbor, estimatedFScore);
+                optimal_path.put(neighbor, current);
+                g_score.put(neighbor, truecost);
+                final int est_f_score = g_score.get(neighbor) + heuristicCostEstimate(neighbor, goal);
+                f_score.put(neighbor, est_f_score);
 
             }
         }
