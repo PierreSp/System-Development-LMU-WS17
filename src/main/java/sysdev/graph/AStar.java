@@ -46,15 +46,12 @@ public class AStar {
         PriorityQueue<Node> open_set=
                 new PriorityQueue<Node>(SIZE, comparator); // The set of nodes to be evaluated, initially containing the start node
 
-       
         // Start with the work
         open_set.add(start);
         g_score.put(start, 0);
         for (Node v : GRAPH.getNodes().values())
             f_score.put(v, Integer.MAX_VALUE);
         f_score.put(start, heuristicCostEstimate(start,goal));
-
-
 
         while (!open_set.isEmpty()) {
             final Node current = open_set.remove();
